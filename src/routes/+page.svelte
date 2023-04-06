@@ -5,22 +5,27 @@
 	import 'prismjs/components/prism-java';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+
 	let code = '';
 	let language = 'javascript';
 
-	let gptJS = `let x = 11;
-  function fc(somethign) {
-	this.send();
-	send = 1;
-	return pp;
-  }`;
-	let gptPython = `print("i love potatoes", 213)`;
-	let gptCPP = `cout << 'something'`;
-	let gptJava = `class Something {
-	public static void main(String[] args) {
-	  System.out.println("Hello World");
-	}
-  }`;
+	let gptJS = ``;
+	let gptPython = ``;
+	let gptCPP = ``;
+	let gptJava = ``;
+
+	onMount(async () => {
+		storedUsage = writable(localStorage.getItem('storedUsage'));
+		storedUsage.subscribe((value) => {
+			// console.log(value);
+			if (value != null) {
+				lastUsage = JSON.parse(value);
+			} else {
+				lastUsage = Date.now();
+			}
+		});
+		// const auth = await getAuth(app);
+	});
 
 	async function postData(inputText, language) {
 		let outputText = '';
@@ -39,22 +44,11 @@
 		}
 		return outputText;
 	}
-	onMount(async () => {
-		storedUsage = writable(localStorage.getItem('storedUsage'));
-		storedUsage.subscribe((value) => {
-			// console.log(value);
-			if (value != null) {
-				lastUsage = JSON.parse(value);
-			} else {
-				lastUsage = Date.now();
-			}
-		});
-		// const auth = await getAuth(app);
-	});
 
 	let storedUsage;
 	var lastUsage = 0;
 	let outputFinalText;
+
 	async function submit() {
 		const now = Date.now();
 		const secondsSinceLastCall = Math.floor((now - lastUsage) / 1000);
@@ -89,6 +83,7 @@
 			outputFinalText = 'Please wait a moment...';
 		}
 	}
+
 	async function postModData(inputText) {
 		let outputText = '';
 		try {
@@ -148,16 +143,16 @@
 	</div>
 	<div class="w-1/2 p-8">
 		<!-- {#if language === 'javascript'} -->
-		<p class="text-white">JavaScript</p>
+		<p class="text-white">JavaScript🌐</p>
 		<pre class="rounded-md"><code class="language-javascript">{gptJS}</code></pre>
 		<!-- {:else if language === 'python'} -->
-		<p class="text-white">Python</p>
+		<p class="text-white">Python🐍</p>
 		<pre class="rounded-md"><code class="language-python">{gptPython}</code></pre>
 		<!-- {:else if language === 'clike'} -->
-		<p class="text-white">C++</p>
+		<p class="text-white">C++🐢</p>
 		<pre class="rounded-md"><code class="language-clike">{gptCPP}</code></pre>
 		<!-- {:else if language === 'java'} -->
-		<p class="text-white">Java</p>
+		<p class="text-white">Java☕</p>
 		<pre class="rounded-md"><code class="language-java">{gptJava}</code></pre>
 		<!-- {/if} -->
 		<!-- <p>{outputFinalText}</p> -->
