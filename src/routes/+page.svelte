@@ -58,9 +58,9 @@
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
 				outputFinalText = await postData(code, language);
-				console.log('🚀 ~ file: +page.svelte:53 ~ submit ~ outputFinalText:', outputFinalText);
+				// console.log('🚀 ~ file: +page.svelte:53 ~ submit ~ outputFinalText:', outputFinalText);
 				let codeBlocks = outputFinalText.match(/```(.*?)```/gs);
-				console.log('🚀 ~ file: +page.svelte:55 ~ submit ~ codeBlocks:', codeBlocks);
+				// console.log('🚀 ~ file: +page.svelte:55 ~ submit ~ codeBlocks:', codeBlocks);
 				gptCPP = codeBlocks[0];
 				gptCPP = gptCPP.replaceAll('`', '');
 				gptJS = codeBlocks[1];
@@ -70,7 +70,7 @@
 				gptJava = codeBlocks[3];
 				gptJava = gptJava.replaceAll('`', '');
 				// outputFinalText = codeBlocks;
-				console.log(gptJS, gptPython, gptJava, gptCPP);
+				// console.log(gptJS, gptPython, gptJava, gptCPP);
 
 				lastUsage = Date.now();
 				storedUsage.subscribe(() => {
@@ -105,7 +105,11 @@
 <div class="flex h-screen bg-[#2d2d2d]">
 	<div class="w-1/2 px-4 py-8">
 		<div class="mb-4">
-			<textarea class="w-full h-64 px-3 py-2 border rounded-lg" bind:value={code} />
+			<textarea
+				class="w-full h-64 px-3 py-2 border rounded-lg"
+				placeholder="enter your code here"
+				bind:value={code}
+			/>
 		</div>
 		<div class="mb-4">
 			<select class="w-full h-10 px-3 py-2 border rounded-lg" bind:value={language}>
@@ -119,7 +123,7 @@
 			<button
 				on:click={async () => {
 					await submit();
-					console.log(gptJS, gptPython, gptJava, gptCPP);
+					// console.log(gptJS, gptPython, gptJava, gptCPP);
 
 					let jsBlock = document.querySelector('.language-javascript');
 					jsBlock.innerHTML = `<code class="language-javascript">${gptJS}</code>`;
@@ -132,10 +136,10 @@
 
 					setTimeout(() => {
 						Prism.highlightAll();
-						console.log('waiting');
+						// console.log('waiting');
 					}, 100);
 
-					console.log('Highlighest');
+					// console.log('Highlighest');
 				}}
 				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700">Translate</button
 			>
