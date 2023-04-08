@@ -115,7 +115,7 @@
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
 				});
-				status = '';
+				// status = '';
 			} else {
 				outputFinalText = 'This input is not allowed 😡';
 				status = 'This input is not allowed 😡';
@@ -180,7 +180,7 @@
 					setTimeout(() => {
 						Prism.highlightAll();
 					}, 100);
-
+					status = '';
 					// console.log('Highlight');
 				}}
 				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700">Translate</button
