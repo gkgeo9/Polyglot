@@ -1,8 +1,9 @@
 <script>
-	import 'prismjs/themes/prism-tomorrow.css';
 	import Prism from 'prismjs';
+	import 'prismjs/themes/prism-tomorrow.css';
 	import 'prismjs/components/prism-python';
 	import 'prismjs/components/prism-java';
+
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -28,17 +29,54 @@
 	});
 
 	async function postData(inputText, language) {
-		let outputText = '';
+		let languagesToTranslate = ['javascript', 'python', 'c++', 'java'];
+		// if (language == 'c++') {
+		// 	languagesToTranslate.push('javascript');
+		// 	languagesToTranslate.push('python');
+		// 	languagesToTranslate.push('java');
+		// } else if (language == 'python') {
+		// 	languagesToTranslate.push('c++');
+		// 	languagesToTranslate.push('javascript');
+		// 	languagesToTranslate.push('java');
+		// } else if (language == 'javascript') {
+		// 	languagesToTranslate.push('c++');
+		// 	languagesToTranslate.push('python');
+		// 	languagesToTranslate.push('java');
+		// } else if (language == 'java') {
+		// 	languagesToTranslate.push('c++');
+		// 	languagesToTranslate.push('javascript');
+		// 	languagesToTranslate.push('python');
+		// }
+		let outputText = ['JS', 'Python', 'C++', 'Java'];
 		try {
-			const response = await fetch('/stuff', {
-				method: 'POST',
-				body: JSON.stringify({ inputText: inputText, language: language }),
-				headers: {
-					'content-type': 'application/json'
+			for (let tempLanguage in languagesToTranslate) {
+				console.log(
+					'🚀 ~ file: +page.svelte:52 ~ postData ~ tempLanguage:',
+					languagesToTranslate[tempLanguage]
+				);
+
+				const response = await fetch('/api', {
+					method: 'POST',
+					body: JSON.stringify({
+						inputText: inputText,
+						language: language,
+						tempLanguage: languagesToTranslate[tempLanguage]
+					}),
+					headers: {
+						'content-type': 'application/json'
+					}
+				});
+				if (languagesToTranslate[tempLanguage] == 'javascript') {
+					outputText[0] = await response.json();
+				} else if (languagesToTranslate[tempLanguage] == 'python') {
+					outputText[1] = await response.json();
+				} else if (languagesToTranslate[tempLanguage] == 'c++') {
+					outputText[2] = await response.json();
+				} else if (languagesToTranslate[tempLanguage] == 'java') {
+					outputText[3] = await response.json();
 				}
-			});
-			outputText = await response.json();
-			// console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
+				console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
+			}
 		} catch {
 			outputText = 'An error occurred👽';
 		}
@@ -48,39 +86,37 @@
 	let storedUsage;
 	var lastUsage = 0;
 	let outputFinalText;
-
+	let status = '';
 	async function submit() {
+		status = 'loading...';
 		const now = Date.now();
-		const secondsSinceLastCall = Math.floor((now - lastUsage) / 1000);
+		// const secondsSinceLastCall = Math.floor((now - lastUsage) / 1000);
 		if (Date.now() - lastUsage >= 5 * 1000) {
 			//5 seconds
 			outputFinalText = 'loading..';
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
 				outputFinalText = await postData(code, language);
-				// console.log('🚀 ~ file: +page.svelte:53 ~ submit ~ outputFinalText:', outputFinalText);
-				let codeBlocks = outputFinalText.match(/```(.*?)```/gs);
-				// console.log('🚀 ~ file: +page.svelte:55 ~ submit ~ codeBlocks:', codeBlocks);
-				gptCPP = codeBlocks[0];
-				gptCPP = gptCPP.replaceAll('`', '');
-				gptJS = codeBlocks[1];
-				gptJS = gptJS.replaceAll('`', '');
-				gptPython = codeBlocks[2];
-				gptPython = gptPython.replaceAll('`', '');
-				gptJava = codeBlocks[3];
-				gptJava = gptJava.replaceAll('`', '');
-				// outputFinalText = codeBlocks;
-				// console.log(gptJS, gptPython, gptJava, gptCPP);
+				if (Array.isArray(outputFinalText)) {
+					gptJS = outputFinalText[0];
+					gptPython = outputFinalText[1];
+					gptCPP = outputFinalText[2];
+					gptJava = outputFinalText[3];
 
+					console.log(gptJS, gptPython, gptJava, gptCPP);
+				}
 				lastUsage = Date.now();
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
 				});
+				status = '';
 			} else {
 				outputFinalText = 'This input is not allowed 😡';
+				status = 'This input is not allowed 😡';
 			}
 		} else {
 			outputFinalText = 'Please wait a moment...';
+			status = 'Please wait a moment...';
 		}
 	}
 
@@ -115,15 +151,15 @@
 			<select class="w-full h-10 px-3 py-2 border rounded-lg" bind:value={language}>
 				<option value="javascript">JavaScript</option>
 				<option value="python">Python</option>
-				<option value="clike">C++</option>
+				<option value="c++">C++</option>
 				<option value="java">Java</option>
 			</select>
 		</div>
-		<div>
+		<div class="flex">
 			<button
 				on:click={async () => {
 					await submit();
-					// console.log(gptJS, gptPython, gptJava, gptCPP);
+					console.log(gptJS, gptPython, gptJava, gptCPP);
 
 					let jsBlock = document.querySelector('.language-javascript');
 					jsBlock.innerHTML = `<code class="language-javascript">${gptJS}</code>`;
@@ -136,29 +172,23 @@
 
 					setTimeout(() => {
 						Prism.highlightAll();
-						// console.log('waiting');
 					}, 100);
 
-					// console.log('Highlighest');
+					// console.log('Highlight');
 				}}
 				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700">Translate</button
 			>
+			<p class="p-3 text-white">{status}</p>
 		</div>
 	</div>
 	<div class="w-1/2 p-8">
-		<!-- {#if language === 'javascript'} -->
 		<p class="text-white">JavaScript🌐</p>
 		<pre class="rounded-md"><code class="language-javascript">{gptJS}</code></pre>
-		<!-- {:else if language === 'python'} -->
 		<p class="text-white">Python🐍</p>
 		<pre class="rounded-md"><code class="language-python">{gptPython}</code></pre>
-		<!-- {:else if language === 'clike'} -->
 		<p class="text-white">C++🐢</p>
 		<pre class="rounded-md"><code class="language-clike">{gptCPP}</code></pre>
-		<!-- {:else if language === 'java'} -->
 		<p class="text-white">Java☕</p>
 		<pre class="rounded-md"><code class="language-java">{gptJava}</code></pre>
-		<!-- {/if} -->
-		<!-- <p>{outputFinalText}</p> -->
 	</div>
 </div>
