@@ -18,25 +18,24 @@
 	onMount(async () => {
 		storedUsage = writable(localStorage.getItem('storedUsage'));
 		storedUsage.subscribe((value) => {
-			// console.log(value);
 			if (value != null) {
 				lastUsage = JSON.parse(value);
 			} else {
 				lastUsage = Date.now();
 			}
 		});
-		// const auth = await getAuth(app);
 	});
-	let outputText = ['', '', '', ''];
+
+	// let outputText = ['', '', '', ''];
 	async function postData(inputText, language) {
 		let languagesToTranslate = ['javascript', 'python', 'c++', 'java'];
 		let outputText = ['JS', 'Python', 'C++', 'Java'];
 		try {
 			for (let tempLanguage in languagesToTranslate) {
-				console.log(
-					'🚀 ~ file: +page.svelte:52 ~ postData ~ tempLanguage:',
-					languagesToTranslate[tempLanguage]
-				);
+				// console.log(
+				// 	'🚀 ~ file: +page.svelte:52 ~ postData ~ tempLanguage:',
+				// 	languagesToTranslate[tempLanguage]
+				// );
 
 				status = `loading ${languagesToTranslate[tempLanguage]}...`;
 
@@ -64,7 +63,7 @@
 					outputText[3] = await response.json();
 					gptJava = outputText[3];
 				}
-				console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
+				// console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
 			}
 		} catch {
 			outputText = 'An error occurred👽';
@@ -79,8 +78,8 @@
 	async function submit() {
 		status = '⏱️loading...';
 		const now = Date.now();
+		//5 seconds
 		if (Date.now() - lastUsage >= 5 * 1000) {
-			//5 seconds
 			outputFinalText = 'loading..';
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
@@ -89,7 +88,6 @@
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
 				});
-				// status = '';
 			} else {
 				outputFinalText = 'This input is not allowed 😡';
 				status = 'This input is not allowed 😡';
@@ -147,7 +145,7 @@
 				on:click={async () => {
 					await submit();
 					status = 'loading color🎨...';
-					console.log(gptJS, gptPython, gptJava, gptCPP);
+					// console.log(gptJS, gptPython, gptJava, gptCPP);
 
 					let jsBlock = document.querySelector('.language-javascript');
 					jsBlock.innerHTML = `<code class="language-javascript">${gptJS}</code>`;
@@ -162,7 +160,6 @@
 						Prism.highlightAll();
 					}, 100);
 					status = '';
-					// console.log('Highlight');
 				}}
 				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 max-md:m-auto"
 				>Translate</button
