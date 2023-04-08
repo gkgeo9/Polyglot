@@ -169,12 +169,12 @@
 	</div>
 	<div class="w-1/2 p-8">
 		<p class="text-white">JavaScript🌐</p>
-		<pre class="rounded-md"><code class="language-javascript">{gptJS}</code></pre>
+		<pre class="rounded-md max-md:w-full"><code class="language-javascript">{gptJS}</code></pre>
 		<p class="text-white">Python🐍</p>
-		<pre class="rounded-md"><code class="language-python">{gptPython}</code></pre>
+		<pre class="rounded-md max-md:w-full"><code class="language-python">{gptPython}</code></pre>
 		<p class="text-white">C++🐢</p>
-		<pre class="rounded-md"><code class="language-clike">{gptCPP}</code></pre>
+		<pre class="rounded-md max-md:w-full"><code class="language-clike">{gptCPP}</code></pre>
 		<p class="text-white">Java☕</p>
-		<pre class="rounded-md"><code class="language-java">{gptJava}</code></pre>
+		<pre class="rounded-md max-md:w-full"><code class="language-java">{gptJava}</code></pre>
 	</div>
 </div>

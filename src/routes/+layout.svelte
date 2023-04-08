@@ -8,9 +8,9 @@
 	<main>
 		<slot />
 	</main>
-	<footer class="text-white flex flex-col p-3">
+	<!-- <footer class="text-white flex flex-col p-3">
 		<p class="max-md:text-center">
 			Made by gkgeo9 with 💖. The program will make mistakes and have errors.
 		</p>
-	</footer>
+	</footer> -->
 </div>
