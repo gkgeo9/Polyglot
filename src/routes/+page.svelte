@@ -128,7 +128,12 @@
 			/>
 		</div>
 		<div class="mb-4">
-			<select class="w-full h-10 px-3 py-2 border rounded-lg" bind:value={language}>
+			<select
+				class="w-full h-10 px-3 py-2 border rounded-lg"
+				aria-label="Select a programming language"
+				title="Select a programming language"
+				bind:value={language}
+			>
 				<option value="javascript">JavaScript</option>
 				<option value="python">Python</option>
 				<option value="c++">C++</option>
@@ -137,6 +142,8 @@
 		</div>
 		<div class="flex">
 			<button
+				aria-label="Translate code to the other programming languages"
+				title="Translate code to the other programming languages"
 				on:click={async () => {
 					await submit();
 					status = 'loading color🎨...';
