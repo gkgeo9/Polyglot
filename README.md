@@ -26,7 +26,7 @@ To translate code, simply paste your code into the input box and select the sour
 
 ## API Usage 🔑
 
-The app utilizes OpenAI's GPT-3 API for code translation. You will need to provide your own API key in order to use the app. Once you have obtained an API key from OpenAI, you can set it as an environment variable by creating a file called .env in the root of the project directory and adding the following line:
+The app utilizes OpenAI's GPT-3.5 Turbo API for code translation. You will need to provide your own API key in order to use the app on your own server. Once you have obtained an API key from OpenAI, you can set it as an environment variable by creating a file called .env in the root of the project directory and adding the following line:
 
 `API_URL=your-open-ai-api-key`
 

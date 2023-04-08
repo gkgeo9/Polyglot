@@ -14,33 +14,23 @@ export async function POST({ request }) {
 		const openai = new OpenAIApi(configuration);
 		let { inputText, language, tempLanguage } = await request.json();
 
-		let flagged = false;
-		const moderationResponse = await openai.createModeration({
-			input: inputText
+		let outputText = '';
+
+		const response = await openai.createChatCompletion({
+			model: 'gpt-3.5-turbo',
+			messages: [
+				{
+					role: 'system',
+					content: `You are a code translator. Translate the following ${language} code to ${tempLanguage}. Only write the code, don't add any extra character such as "\`"`
+				},
+				{ role: 'user', content: `${inputText}` }
+			],
+			max_tokens: 500,
+			temperature: 0.7
 		});
+		outputText = response.data.choices[0].message.content;
 
-		flagged = moderationResponse.data.results[0].flagged;
-		if (flagged) {
-			return new Response(JSON.stringify('This input was flagged!'));
-		} else {
-			let outputText = '';
-
-			const response = await openai.createChatCompletion({
-				model: 'gpt-3.5-turbo',
-				messages: [
-					{
-						role: 'system',
-						content: `You are a code translator. Translate the following ${language} code to ${tempLanguage}. Only write the code, don't add any extra character such as "\`"`
-					},
-					{ role: 'user', content: `${inputText}` }
-				],
-				max_tokens: 500,
-				temperature: 0.7
-			});
-			outputText = response.data.choices[0].message.content;
-
-			return new Response(JSON.stringify(outputText));
-		}
+		return new Response(JSON.stringify(outputText));
 	}
 	return new Response(JSON.stringify('No no no 😉'));
 }

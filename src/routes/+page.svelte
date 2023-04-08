@@ -96,21 +96,12 @@
 	async function submit() {
 		status = '⏱️loading...';
 		const now = Date.now();
-		// const secondsSinceLastCall = Math.floor((now - lastUsage) / 1000);
 		if (Date.now() - lastUsage >= 5 * 1000) {
 			//5 seconds
 			outputFinalText = 'loading..';
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
 				outputFinalText = await postData(code, language);
-				// if (Array.isArray(outputFinalText)) {
-				// 	gptJS = outputFinalText[0];
-				// 	gptPython = outputFinalText[1];
-				// 	gptCPP = outputFinalText[2];
-				// 	gptJava = outputFinalText[3];
-
-				// 	console.log(gptJS, gptPython, gptJava, gptCPP);
-				// }
 				lastUsage = Date.now();
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
