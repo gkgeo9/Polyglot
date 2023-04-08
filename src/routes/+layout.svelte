@@ -4,11 +4,13 @@
 </script>
 
 <div class="app">
-	<p class="text-6xl text-white m-3">AI Code Translator🖥️</p>
+	<p class="text-6xl text-white m-3 max-md:text-center">AI Code Translator🖥️</p>
 	<main>
 		<slot />
 	</main>
-	<footer class="text-white flex p-3 fixed bottom-0 w-full">
-		<p class="m-auto">Made by gkgeo9 with 💖. The program will make mistakes and have errors.</p>
+	<footer class="text-white flex flex-col p-3">
+		<p class="max-md:text-center">
+			Made by gkgeo9 with 💖. The program will make mistakes and have errors.
+		</p>
 	</footer>
 </div>

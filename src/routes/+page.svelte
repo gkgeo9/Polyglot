@@ -30,23 +30,6 @@
 	let outputText = ['', '', '', ''];
 	async function postData(inputText, language) {
 		let languagesToTranslate = ['javascript', 'python', 'c++', 'java'];
-		// if (language == 'c++') {
-		// 	languagesToTranslate.push('javascript');
-		// 	languagesToTranslate.push('python');
-		// 	languagesToTranslate.push('java');
-		// } else if (language == 'python') {
-		// 	languagesToTranslate.push('c++');
-		// 	languagesToTranslate.push('javascript');
-		// 	languagesToTranslate.push('java');
-		// } else if (language == 'javascript') {
-		// 	languagesToTranslate.push('c++');
-		// 	languagesToTranslate.push('python');
-		// 	languagesToTranslate.push('java');
-		// } else if (language == 'java') {
-		// 	languagesToTranslate.push('c++');
-		// 	languagesToTranslate.push('javascript');
-		// 	languagesToTranslate.push('python');
-		// }
 		let outputText = ['JS', 'Python', 'C++', 'Java'];
 		try {
 			for (let tempLanguage in languagesToTranslate) {
@@ -61,8 +44,8 @@
 					method: 'POST',
 					body: JSON.stringify({
 						inputText: inputText,
-						language: language,
-						tempLanguage: languagesToTranslate[tempLanguage]
+						fromLanguage: language,
+						toLanguage: languagesToTranslate[tempLanguage]
 					}),
 					headers: {
 						'content-type': 'application/json'
@@ -135,12 +118,12 @@
 	}
 </script>
 
-<div class="flex h-screen bg-[#2d2d2d]">
-	<div class="w-1/2 px-4 py-8">
+<div class="flex max-md:flex-col h-screen bg-[#2d2d2d]">
+	<div class="w-1/2 max-md:w-full px-4 py-8">
 		<div class="mb-4">
 			<textarea
 				class="w-full h-64 px-3 py-2 border rounded-lg"
-				placeholder="enter your code here"
+				placeholder="enter your code here👨‍💻"
 				bind:value={code}
 			/>
 		</div>
@@ -174,9 +157,10 @@
 					status = '';
 					// console.log('Highlight');
 				}}
-				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700">Translate</button
+				class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 max-md:m-auto"
+				>Translate</button
 			>
-			<p class="p-3 text-white">{status}</p>
+			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
 	</div>
 	<div class="w-1/2 p-8">

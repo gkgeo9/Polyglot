@@ -5,14 +5,14 @@ export async function POST({ request }) {
 	let originAddress = await request.headers.get('origin');
 	if (
 		originAddress == 'https://codetranslator.vdoc.dev/' ||
-		originAddress == 'https://codetranslator.vdoc.dev'
-		// || originAddress == 'http://127.0.0.1:5173'
+		originAddress == 'https://codetranslator.vdoc.dev' ||
+		originAddress == 'http://127.0.0.1:5173'
 	) {
 		const configuration = new Configuration({
 			apiKey: API_URL
 		});
 		const openai = new OpenAIApi(configuration);
-		let { inputText, language, tempLanguage } = await request.json();
+		let { inputText, fromLanguage, toLanguage } = await request.json();
 
 		let outputText = '';
 
@@ -21,7 +21,7 @@ export async function POST({ request }) {
 			messages: [
 				{
 					role: 'system',
-					content: `You are a code translator. Translate the following ${language} code to ${tempLanguage}. Only write the code, don't add any extra character such as "\`"`
+					content: `You are a code translator. Translate the following ${fromLanguage} code to ${toLanguage}. Only write the code, don't add any extra character such as "\`"`
 				},
 				{ role: 'user', content: `${inputText}` }
 			],
