@@ -1,8 +1,10 @@
-# Code Translator Web App 🌐💻🔥
+# Polyglot Code | AI Code Translator Web App 🌐💻🔥
 
 This is a web app that allows users to translate code from one programming language to another. The app currently supports translation between JavaScript, Python, C++, and Java. The app is built using SvelteKit and Tailwind CSS, and it utilizes OpenAI's API for code translation.
 
 **Live Demo: http://polyglot.vdoc.dev/ **
+
+** Video Demo: https://youtu.be/U5c1YDQgD_0 **
 
 ## Installation 🛠️
 
