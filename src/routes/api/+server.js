@@ -30,7 +30,7 @@ export async function POST({ request }) {
 				messages: [
 					{
 						role: 'system',
-						content: `You are a code translator. Translate the following ${language} code to ${tempLanguage}.`
+						content: `You are a code translator. Translate the following ${language} code to ${tempLanguage}. Only write the code, don't add any extra character such as "\`"`
 					},
 					{ role: 'user', content: `${inputText}` }
 				],

@@ -8,7 +8,7 @@
 	<main>
 		<slot />
 	</main>
-	<footer class="text-white flex p-3">
+	<footer class="text-white flex p-3 fixed bottom-0 w-full">
 		<p class="m-auto">Made by gkgeo9 with 💖. The program will make mistakes and have errors.</p>
 	</footer>
 </div>

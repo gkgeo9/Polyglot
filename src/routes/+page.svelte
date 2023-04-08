@@ -27,7 +27,7 @@
 		});
 		// const auth = await getAuth(app);
 	});
-
+	let outputText = ['', '', '', ''];
 	async function postData(inputText, language) {
 		let languagesToTranslate = ['javascript', 'python', 'c++', 'java'];
 		// if (language == 'c++') {
@@ -55,6 +55,8 @@
 					languagesToTranslate[tempLanguage]
 				);
 
+				status = `loading ${languagesToTranslate[tempLanguage]}...`;
+
 				const response = await fetch('/api', {
 					method: 'POST',
 					body: JSON.stringify({
@@ -68,12 +70,16 @@
 				});
 				if (languagesToTranslate[tempLanguage] == 'javascript') {
 					outputText[0] = await response.json();
+					gptJS = outputText[0];
 				} else if (languagesToTranslate[tempLanguage] == 'python') {
 					outputText[1] = await response.json();
+					gptPython = outputText[1];
 				} else if (languagesToTranslate[tempLanguage] == 'c++') {
 					outputText[2] = await response.json();
+					gptCPP = outputText[2];
 				} else if (languagesToTranslate[tempLanguage] == 'java') {
 					outputText[3] = await response.json();
+					gptJava = outputText[3];
 				}
 				console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
 			}
@@ -88,7 +94,7 @@
 	let outputFinalText;
 	let status = '';
 	async function submit() {
-		status = 'loading...';
+		status = '⏱️loading...';
 		const now = Date.now();
 		// const secondsSinceLastCall = Math.floor((now - lastUsage) / 1000);
 		if (Date.now() - lastUsage >= 5 * 1000) {
@@ -97,14 +103,14 @@
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
 				outputFinalText = await postData(code, language);
-				if (Array.isArray(outputFinalText)) {
-					gptJS = outputFinalText[0];
-					gptPython = outputFinalText[1];
-					gptCPP = outputFinalText[2];
-					gptJava = outputFinalText[3];
+				// if (Array.isArray(outputFinalText)) {
+				// 	gptJS = outputFinalText[0];
+				// 	gptPython = outputFinalText[1];
+				// 	gptCPP = outputFinalText[2];
+				// 	gptJava = outputFinalText[3];
 
-					console.log(gptJS, gptPython, gptJava, gptCPP);
-				}
+				// 	console.log(gptJS, gptPython, gptJava, gptCPP);
+				// }
 				lastUsage = Date.now();
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
@@ -159,6 +165,7 @@
 			<button
 				on:click={async () => {
 					await submit();
+					status = 'loading color🎨...';
 					console.log(gptJS, gptPython, gptJava, gptCPP);
 
 					let jsBlock = document.querySelector('.language-javascript');
