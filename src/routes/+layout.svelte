@@ -4,7 +4,7 @@
 </script>
 
 <div class="app">
-	<p class="text-6xl text-white m-3 max-md:text-center">AI Code Translator🖥️</p>
+	<p class="text-6xl text-white m-3 max-md:text-center">Polyglot Code | AI Code Translator🖥️</p>
 	<main>
 		<slot />
 	</main>
