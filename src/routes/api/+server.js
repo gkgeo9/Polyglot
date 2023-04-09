@@ -16,22 +16,30 @@ export async function POST({ request }) {
 		let { inputText, fromLanguage, toLanguage } = await request.json();
 
 		let outputText = '';
-
-		const response = await openai.createChatCompletion({
-			model: 'gpt-3.5-turbo',
-			messages: [
-				{
-					role: 'system',
-					content: `You are a code translator. Translate the following ${fromLanguage} code to ${toLanguage}. Only write the code, don't add any extra character such as "\`"`
-				},
-				{ role: 'user', content: `${inputText}` }
-			],
-			max_tokens: 250,
-			temperature: 0.7
+		const response = await openai.createCompletion({
+			model: 'text-davinci-003',
+			prompt: `You are a code translator. Translate the following ${fromLanguage} code to ${toLanguage}. Only write the code, don't add any extra character such as "\`"\n${inputText}`,
+			max_tokens: 180,
+			temperature: 0.5
 		});
-		outputText = response.data.choices[0].message.content;
-
+		outputText = response.data.choices[0].text;
 		return new Response(JSON.stringify(outputText));
+		// chat completion
+		// const response = await openai.createChatCompletion({
+		// 	model: 'gpt-3.5-turbo',
+		// 	messages: [
+		// 		{
+		// 			role: 'system',
+		// 			content: `You are a code translator. Translate the following ${fromLanguage} code to ${toLanguage}. Only write the code, don't add any extra character such as "\`"`
+		// 		},
+		// 		{ role: 'user', content: `${inputText}` }
+		// 	],
+		// 	max_tokens: 250,
+		// 	temperature: 0.7
+		// });
+		// outputText = response.data.choices[0].message.content;
+
+		// return new Response(JSON.stringify(outputText));
 	}
 	return new Response(JSON.stringify('No no no 😉'));
 }
