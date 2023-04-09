@@ -144,9 +144,12 @@
 				const errorMessage = error.message;
 			});
 	}
+
+	import Pulse from './Pulse.svelte';
 </script>
 
-<div class="flex max-md:flex-col h-screen bg-[#2d2d2d]">
+<Pulse />
+<div class="flex max-md:flex-col h-screen">
 	<div class="w-1/2 max-md:w-full px-4 py-8">
 		<div class="mb-4">
 			<textarea
@@ -208,3 +211,4 @@
 		<pre class="rounded-md max-md:w-full"><code class="language-java">{gptJava}</code></pre>
 	</div>
 </div>
+<!-- </Pulse> -->
