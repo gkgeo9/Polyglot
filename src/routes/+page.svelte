@@ -162,6 +162,9 @@
 					let javaBlock = document.querySelector('.language-java');
 					javaBlock.innerHTML = `<code class="language-java">${gptJava}</code>`;
 				}
+				setTimeout(() => {
+					Prism.highlightAll();
+				}, 100);
 				// console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
 			}
 		} catch {
