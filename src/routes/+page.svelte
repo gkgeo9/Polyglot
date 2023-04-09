@@ -10,10 +10,10 @@
 	let code = '';
 	let language = 'javascript';
 
-	let gptJS = `Click`;
-	let gptPython = `the`;
-	let gptCPP = `translate`;
-	let gptJava = `button!`;
+	let gptJS = `CLICK`;
+	let gptPython = `THE`;
+	let gptCPP = `TRANSLATE`;
+	let gptJava = `BUTTON!`;
 
 	let app, auth, analytics;
 	onMount(async () => {
@@ -198,8 +198,7 @@
 			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
 		<p class="text-white text-center p-3">
-			Usage: Choose the language of your code ➡️ Write your code in the text box ➡️ Click on the
-			"translate" button ➡️ 😍
+			Usage: Choose the language ➡️ Write code ➡️ Translate ➡️ 😍
 		</p>
 	</div>
 	<div class="w-1/2 p-8">
