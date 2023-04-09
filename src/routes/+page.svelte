@@ -244,7 +244,7 @@
 
 <div class="flex max-md:flex-col h-screen">
 	<div class="w-1/2 max-md:w-full px-4 py-8">
-		<p class="text-white text-left pb-8 max-md:text-center text-blue-400">
+		<p class="text-left pb-8 max-md:text-center text-blue-400">
 			Usage: Choose input language ➡️ Write code ➡️ Click Translate 😍
 		</p>
 		<div class="mb-4">
