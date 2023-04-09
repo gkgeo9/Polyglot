@@ -26,7 +26,7 @@ export async function POST({ request }) {
 				},
 				{ role: 'user', content: `${inputText}` }
 			],
-			max_tokens: 500,
+			max_tokens: 250,
 			temperature: 0.7
 		});
 		outputText = response.data.choices[0].message.content;
