@@ -26,6 +26,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"firebase": "^9.19.1",
 		"openai": "^3.2.1",
 		"prismjs": "^1.29.0"
 	}

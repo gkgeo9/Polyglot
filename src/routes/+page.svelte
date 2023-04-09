@@ -15,6 +15,7 @@
 	let gptCPP = ``;
 	let gptJava = ``;
 
+	let app, auth, analytics;
 	onMount(async () => {
 		storedUsage = writable(localStorage.getItem('storedUsage'));
 		storedUsage.subscribe((value) => {
@@ -24,6 +25,10 @@
 				lastUsage = Date.now();
 			}
 		});
+		app = initializeApp(firebaseConfig);
+		analytics = getAnalytics(app);
+		auth = getAuth();
+		logIn();
 	});
 
 	// let outputText = ['', '', '', ''];
@@ -113,6 +118,31 @@
 			outputText = 'An error occurred👽';
 		}
 		return outputText;
+	}
+
+	import { initializeApp } from 'firebase/app';
+	import { getAnalytics } from 'firebase/analytics';
+	import { getAuth, signInAnonymously } from 'firebase/auth';
+	const firebaseConfig = {
+		apiKey: 'AIzaSyDulIaauIfYaPyQNzyvBwXH70BdYLx_HeI',
+		authDomain: 'polyglot-code.firebaseapp.com',
+		projectId: 'polyglot-code',
+		storageBucket: 'polyglot-code.appspot.com',
+		messagingSenderId: '98506944926',
+		appId: '1:98506944926:web:525a3e857ebd686604268f',
+		measurementId: 'G-RNKPQQRDZM'
+	};
+
+	let user_id;
+	function logIn() {
+		signInAnonymously(auth)
+			.then(() => {
+				user_id = auth.currentUser.uid;
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+			});
 	}
 </script>
 
