@@ -23,6 +23,9 @@ export async function POST({ request }) {
 			temperature: 0.5
 		});
 		outputText = response.data.choices[0].text;
+		while (outputText.charAt(0) === '\n') {
+			outputText = outputText.slice(1);
+		}
 		return new Response(JSON.stringify(outputText));
 		// chat completion
 		// const response = await openai.createChatCompletion({
