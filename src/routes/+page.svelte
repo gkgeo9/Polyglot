@@ -149,13 +149,6 @@
 <div class="flex max-md:flex-col h-screen">
 	<div class="w-1/2 max-md:w-full px-4 py-8">
 		<div class="mb-4">
-			<textarea
-				class="w-full h-64 px-3 py-2 border rounded-lg"
-				placeholder="enter your code here👨‍💻"
-				bind:value={code}
-			/>
-		</div>
-		<div class="mb-4">
 			<select
 				class="w-full h-10 px-3 py-2 border rounded-lg"
 				aria-label="Select a programming language"
@@ -168,6 +161,14 @@
 				<option value="java">Java</option>
 			</select>
 		</div>
+		<div class="mb-4">
+			<textarea
+				class="w-full h-64 px-3 py-2 border rounded-lg"
+				placeholder="enter your code here👨‍💻"
+				bind:value={code}
+			/>
+		</div>
+
 		<div class="flex">
 			<button
 				aria-label="Translate code to the other programming languages"
@@ -197,8 +198,8 @@
 			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
 		<p class="text-white text-center p-3">
-			Usage: Write your code in the text box ➡️ Choose the language that you used to write your code
-			➡️ Click on the "translate" button ➡️ 😍
+			Usage: Choose the language of your code ➡️ Write your code in the text box ➡️ Click on the
+			"translate" button ➡️ 😍
 		</p>
 	</div>
 	<div class="w-1/2 p-8">
