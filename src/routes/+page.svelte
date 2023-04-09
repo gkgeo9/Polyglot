@@ -10,10 +10,10 @@
 	let code = '';
 	let language = 'javascript';
 
-	let gptJS = ``;
-	let gptPython = ``;
-	let gptCPP = ``;
-	let gptJava = ``;
+	let gptJS = `Click`;
+	let gptPython = `the`;
+	let gptCPP = `translate`;
+	let gptJava = `button!`;
 
 	let app, auth, analytics;
 	onMount(async () => {
@@ -148,7 +148,7 @@
 	import Pulse from './Pulse.svelte';
 </script>
 
-<Pulse />
+<!-- <Pulse /> -->
 <div class="flex max-md:flex-col h-screen">
 	<div class="w-1/2 max-md:w-full px-4 py-8">
 		<div class="mb-4">
