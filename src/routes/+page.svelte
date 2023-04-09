@@ -199,6 +199,10 @@
 			>
 			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
+		<p class="text-white text-center p-3">
+			Usage: Write your code in the text box ➡️ Choose the language that you used to write your code
+			➡️ Click on the "translate" button ➡️ 😍
+		</p>
 	</div>
 	<div class="w-1/2 p-8">
 		<p class="text-white">JavaScript🌐</p>
