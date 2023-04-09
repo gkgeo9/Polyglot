@@ -198,7 +198,7 @@
 			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
 		<p class="text-white text-center p-3">
-			Usage: Choose the language ➡️ Write code ➡️ Translate ➡️ 😍
+			Usage: Choose input language ➡️ Write code ➡️ Translate ➡️ 😍
 		</p>
 	</div>
 	<div class="w-1/2 p-8">
