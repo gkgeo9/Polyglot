@@ -303,12 +303,45 @@
 
 	<div class="w-1/2 p-8">
 		<p class="text-green-300">JavaScript🌐</p>
-		<pre class="rounded-md max-md:w-80"><code class="language-javascript">{gptJS}</code></pre>
+		<div class="relative">
+			<pre class="rounded-md max-md:w-80 text-white"><code class="language-javascript">{gptJS}</code
+				></pre>
+			<button
+				class="absolute top-1 right-1 max-md:w-80 max-md:left-full text-white hover:bg-blue-800 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 max-md:focus:ring-0"
+				on:click={() => {
+					navigator.clipboard.writeText(gptJS);
+				}}>🖨️</button
+			>
+		</div>
 		<p class="text-green-300">Python🐍</p>
-		<pre class="rounded-md max-md:w-80"><code class="language-python">{gptPython}</code></pre>
+		<div class="relative">
+			<pre class="rounded-md max-md:w-80"><code class="language-python">{gptPython}</code></pre>
+			<button
+				class="absolute top-1 right-1 max-md:w-80 max-md:left-full text-white hover:bg-blue-800 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 max-md:focus:ring-0"
+				on:click={() => {
+					navigator.clipboard.writeText(gptPython);
+				}}>🖨️</button
+			>
+		</div>
 		<p class="text-green-300">C++🐢</p>
-		<pre class="rounded-md max-md:w-80"><code class="language-clike">{gptCPP}</code></pre>
+		<div class="relative">
+			<pre class="rounded-md max-md:w-80"><code class="language-clike">{gptCPP}</code></pre>
+			<button
+				class="absolute top-1 right-1 max-md:w-80 max-md:left-full text-white hover:bg-blue-800 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 max-md:focus:ring-0"
+				on:click={() => {
+					navigator.clipboard.writeText(gptCPP);
+				}}>🖨️</button
+			>
+		</div>
 		<p class="text-green-300">Java☕</p>
-		<pre class="rounded-md max-md:w-80"><code class="language-java">{gptJava}</code></pre>
+		<div class="relative">
+			<pre class="rounded-md max-md:w-80"><code class="language-java">{gptJava}</code></pre>
+			<button
+				class="absolute top-1 right-1 max-md:w-80 max-md:left-full text-white hover:bg-blue-800 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300 max-md:focus:ring-0"
+				on:click={() => {
+					navigator.clipboard.writeText(gptJava);
+				}}>🖨️</button
+			>
+		</div>
 	</div>
 </div>
