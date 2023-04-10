@@ -37,3 +37,5 @@ The app utilizes OpenAI's GPT-3.5 Turbo API for code translation. You will need 
 If you would like to contribute to the development of this app, feel free to submit a pull request. Before submitting a pull request, please make sure that your code adheres to the project's code style guidelines.
 
 🙏 Thank you for checking out my project!
+
+_This project was specifically created for the [2023 Svelte Hack Competition](https://hack.sveltesociety.dev/)!_

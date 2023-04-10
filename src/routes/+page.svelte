@@ -92,12 +92,14 @@
 		status = '⏱️loading...';
 		const now = Date.now();
 		//5 seconds
-		if (Date.now() - lastUsage >= 5 * 1000) {
+		if (Date.now() - lastUsage >= 10 * 1000) {
+			console.log((Date.now() - lastUsage) / 1000);
 			outputFinalText = 'loading..';
 			let allowedInput = await postModData(code);
 			if (allowedInput.toLowerCase().includes('good')) {
 				outputFinalText = await postData(code, language);
 				lastUsage = Date.now();
+				// console.log('🚀 ~ file: +page.svelte:101 ~ submit ~ lastUsage:', lastUsage);
 				storedUsage.subscribe(() => {
 					localStorage.setItem('storedUsage', JSON.stringify(Date.now()));
 				});
@@ -106,6 +108,8 @@
 				status = 'This input is not allowed 😡';
 			}
 		} else {
+			console.log((Date.now() - lastUsage) / 1000, '- too close');
+
 			outputFinalText = 'Please wait a moment...';
 			status = 'Please wait a moment...';
 		}
@@ -122,11 +126,6 @@
 		let outputText = ['JS', 'Python', 'C++', 'Java'];
 		try {
 			for (let tempLanguage in languagesToTranslate) {
-				// console.log(
-				// 	'🚀 ~ file: +page.svelte:52 ~ postData ~ tempLanguage:',
-				// 	languagesToTranslate[tempLanguage]
-				// );
-
 				status = `loading ${languagesToTranslate[tempLanguage]}...`;
 
 				const response = await fetch('/api', {
@@ -165,7 +164,6 @@
 				setTimeout(() => {
 					Prism.highlightAll();
 				}, 100);
-				// console.log('🚀 ~ file: +page.svelte:17 ~ postData ~ outputText:', outputText);
 			}
 		} catch {
 			outputText = 'An error occurred👽';
@@ -278,16 +276,6 @@
 				on:click={async () => {
 					await submit();
 					status = 'loading color🎨...';
-					// console.log(gptJS, gptPython, gptJava, gptCPP);
-
-					// let jsBlock = document.querySelector('.language-javascript');
-					// jsBlock.innerHTML = `<code class="language-javascript">${gptJS}</code>`;
-					// let pythonBlock = document.querySelector('.language-python');
-					// pythonBlock.innerHTML = `<code class="language-python">${gptPython}</code>`;
-					// let javaBlock = document.querySelector('.language-java');
-					// javaBlock.innerHTML = `<code class="language-java">${gptJava}</code>`;
-					// let cppBlock = document.querySelector('.language-clike');
-					// cppBlock.innerHTML = `<code class="language-clike">${gptCPP}</code>`;
 
 					setTimeout(() => {
 						Prism.highlightAll();
