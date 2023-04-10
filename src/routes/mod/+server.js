@@ -8,8 +8,7 @@ export async function POST({ request }) {
 		originAddress == 'https://codetranslator.vdoc.dev/' ||
 		originAddress == 'https://codetranslator.vdoc.dev' ||
 		originAddress == 'https://polyglot.vdoc.dev/' ||
-		originAddress == 'https://polyglot.vdoc.dev' ||
-		originAddress == 'http://127.0.0.1:5173'
+		originAddress == 'https://polyglot.vdoc.dev' //|| originAddress == 'http://127.0.0.1:5173'
 	) {
 		const configuration = new Configuration({
 			apiKey: API_URL
