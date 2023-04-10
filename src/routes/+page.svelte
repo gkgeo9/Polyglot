@@ -300,6 +300,7 @@
 			<p class="p-3 flex-1 text-white max-md:m-auto">{status}</p>
 		</div>
 	</div>
+
 	<div class="w-1/2 p-8">
 		<p class="text-green-300">JavaScript🌐</p>
 		<pre class="rounded-md max-md:w-80"><code class="language-javascript">{gptJS}</code></pre>
